@@ -14,10 +14,11 @@ gem 'jbuilder', '~> 2.5'
 # Faster JSON
 gem 'multi_json'
 gem 'oj'
+# Generate safe random strings
+gem 'nanoid'
 
 # Environment variables loading
 gem 'figaro'
-
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.1.0', require: false
 
