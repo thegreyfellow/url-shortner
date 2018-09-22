@@ -16,6 +16,8 @@ gem 'multi_json'
 gem 'oj'
 # Generate safe random strings
 gem 'nanoid'
+# Fast and Chainable http library
+gem 'http', '> 3'
 
 # Environment variables loading
 gem 'figaro'
