@@ -9,8 +9,8 @@ class UrlsController < ApplicationController
 
   # GET /urls/1
   # GET /urls/1.json
-  def show
-  end
+  # def show
+  # end
 
   # POST /urls
   # POST /urls.json
@@ -26,28 +26,29 @@ class UrlsController < ApplicationController
 
   # PATCH/PUT /urls/1
   # PATCH/PUT /urls/1.json
-  def update
-    if @url.update(url_params)
-      render :show, status: :ok, location: @url
-    else
-      render json: @url.errors, status: :unprocessable_entity
-    end
-  end
+  # def update
+  #   if @url.update(url_params)
+  #     render :show, status: :ok, location: @url
+  #   else
+  #     render json: @url.errors, status: :unprocessable_entity
+  #   end
+  # end
 
   # DELETE /urls/1
   # DELETE /urls/1.json
-  def destroy
-    @url.destroy
-  end
+  # def destroy
+  #   @url.destroy
+  # end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_url
-      @url = Url.find(params[:id])
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def url_params
-      params.require(:url).permit(:original_url, :short_url, :random_string, :user_id)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_url
+    @url = Url.find_by(id: params[:id], user_id: user_id)
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def url_params
+    params.require(:url).permit(:original_url, :short_url)
+  end
 end
