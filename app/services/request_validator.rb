@@ -4,11 +4,11 @@ class RequestValidator
   def initialize(options = {})
     @options = options
     @token = options[:token]
-    @result = OpenStruct.new(response: nil, valid: false, errors: [])
+    @result = OpenStruct.new(valid: false, errors: [])
   end
 
   def run!
-    validate_request
+    # validate_request
     @result.valid = true # for now
     @result
   end
@@ -19,5 +19,14 @@ class RequestValidator
     # should send http request to main microservice
     # should let the request continue if token is valid
     # should halt the request if token is invalid
+    response = HTTP.auth("Bearer #{@token}").headers(
+      accept: 'application/json',
+      content_type: 'application/json'
+    ).post("#{ENV['MAIN_SERVICE_URL']}/validate")
+    if response.body["valid"]
+      @result.valid = true
+    end
+  rescue HTTP::ResponseError => ex
+    @result.errors << ex.response
   end
 end
